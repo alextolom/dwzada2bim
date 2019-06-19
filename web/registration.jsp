@@ -48,7 +48,7 @@
                     <h2 class="title">Informações</h2>
                     <form method="POST" action="${pageContext.request.contextPath}/usuario" role="form">
                         <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="NOME" name="name" value="<%=editando != null ? cat.getNomeUsuario() : ""%>">
+                            <input class="input--style-1" type="text" placeholder="NOME" name="" value="<%=editando != null ? cat.getNomeUsuario() : ""%>">
                         </div>
                         <div class="input-group">
                             <input class="input--style-1" type="text" placeholder="USERNAME" name="username">
