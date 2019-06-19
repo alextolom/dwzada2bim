@@ -62,6 +62,9 @@
                         <li>
                             <a href="login.jsp">Login</a>
                         </li> 
+                        <li>
+                            <a href="listausuario.jsp">Listausuario</a>
+                        </li> 
                     </ul>
 
                     <ul class="nk-nav nk-nav-right nk-nav-icons">

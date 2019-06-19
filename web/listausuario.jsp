@@ -38,7 +38,7 @@
         <table border="1px" width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;">
             <thead>
                 <tr role="row">
-                    <th>Ida</th>
+                    <th>Id</th>
                     <th>Usuario</th>
                     <th>Nome</th>
                     <th>Email</th>

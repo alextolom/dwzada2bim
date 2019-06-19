@@ -9,9 +9,6 @@ import DAOs.DAOUsuario;
 import Entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.NumberFormat;
-import java.util.List;
-import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,13 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Jaque
+ * @author a1817744
  */
 @WebServlet(name = "UsuarioServlet", urlPatterns = {"/usuario"})
 public class UsuarioServlet extends HttpServlet {
-
-    Locale ptBr = new Locale("pt", "BR");
-    NumberFormat formatoDinheiro = NumberFormat.getCurrencyInstance(ptBr);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,99 +34,28 @@ public class UsuarioServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String nomeUsuario = "";
-        String usernameUsuario = "";
-        String emailUsuario = "";
-        String passwordUsuario = "";
-        String submitCadastro = "";
-        int usuarioId = 0;
-
-        try (PrintWriter out = response.getWriter()) {
-            submitCadastro = request.getParameter("ok");
-
-            String resultado = "";
-            if (submitCadastro == null) {
-                //se nao veio do submit é lista
+        try (PrintWriter out = response.getWriter()) {            
+            
+                String nome = request.getParameter("nome");
+                String username = request.getParameter("username");
+                String email = request.getParameter("email");
+                String senha = request.getParameter("senha");
                 
-                nomeUsuario = request.getParameter("nomeUsuario");
-                if (nomeUsuario == null || nomeUsuario.equals("")) {
-                    resultado = listaProdutosCadastrados();
-                } else {
-                    resultado = listaUsuarioNome(nomeUsuario);
-                }
-            } else {
-                //parametros do form
-                //aqui pq se passar do if não serão nulos
-                
-                //tudo que vem do formulario é string, por isso aqui alguns precisam de conversão
-                nomeUsuario = request.getParameter("nome");
-                usernameUsuario = request.getParameter("username");
-                emailUsuario = request.getParameter("email");
-                passwordUsuario = request.getParameter("password");
-
-                DAOUsuario daoUsuario = new DAOUsuario();
-//                DAOCategoria daoCategoria = new DAOCategoria();
                 Usuario usuario = new Usuario();
-
-                //busca a categoria do id selecionado no select do form
-                //busca com o listById para criar um objeto de entidade completo, 
-                //que é o parâmetro que o set de categoria pede
-//                Categoria categoria = daoCategoria.listById(categoriaId).get(0);
-
-                //seta informacoes do produto na entidade
+                DAOUsuario daoUsuario = new DAOUsuario();
                 
-                //essa tabela nao tem id automatico no banco, então precisa setar
-                //para nao pedir p/ usuario no formulario e correr o risco de repetição
-                //use a função do dao p/ calcular o id
-                usuario.setIdUsuario(daoUsuario.autoIdUsuario());
-                usuario.setUsernameUsuario(usernameUsuario);
-                usuario.setPasswordUsuario(passwordUsuario);
-                usuario.setNomeUsuario(nomeUsuario);
-                usuario.setEmailUsuario(emailUsuario);
-                //seta a categoria do produto, que vai gravar apenas o id como fk no produto  no banco
-                //porém, aqui é orientado a objeto, então o categoria é um objeto da entidade categoria
-
-                //insere o produto no banco
+                usuario.setIdUsuario(daoUsuario.autoIdUsuario());               
+                usuario.setNomeUsuario(nome);
+                usuario.setUsernameUsuario(username);
+                usuario.setEmailUsuario(email);
+                usuario.setPasswordUsuario(senha);
+                
                 daoUsuario.inserir(usuario);
-                
-                resultado = listaProdutosCadastrados();
+            
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
             }
-            request.getSession().setAttribute("resultado", resultado);
-            response.sendRedirect(request.getContextPath() + "/paginas/produto.jsp");
         }
-    }
-
-    protected String listaUsuarioNome(String nomeUsuario) {
-        DAOUsuario usuario = new DAOUsuario();
-        String tabela = "";
-        List<Usuario> lista = usuario.listByNome(nomeUsuario);
-        for (Usuario l : lista) {
-            tabela += "<tr>";
-//                    + "<td>" + l.getNomeUsuario() + "</td>"
-//                    + "<td>" + formatoDinheiro.format(l.getPrecoProduto()) + "</td>"
-//                    + "<td>" + l.getQuantidadeProduto() + "</td>"
-//                    + "<td>" + l.getCategoriaIdCategoria().getNomeCategoria() + "</td>"
-//                    + "</tr>";
-        }
-
-        return tabela;
-    }
-
-    protected String listaProdutosCadastrados() {
-        DAOUsuario usuario = new DAOUsuario();
-        String tabela = "";
-        List<Usuario> lista = usuario.listInOrderNome();
-        for (Usuario l : lista) {
-            tabela += "<tr>";
-//                    + "<td>" + l.getNomeProduto() + "</td>"
-//                    + "<td>" + formatoDinheiro.format(l.getPrecoProduto()) + "</td>"
-//                    + "<td>" + l.getQuantidadeProduto() + "</td>"
-//                    + "<td>" + l.getCategoriaIdCategoria().getNomeCategoria() + "</td>"
-//                    + "</tr>";
-        }
-
-        return tabela;
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -147,7 +70,6 @@ public class UsuarioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        System.out.println("teste doget");
     }
 
     /**
@@ -162,7 +84,6 @@ public class UsuarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        System.out.println("teste dopost");
     }
 
     /**

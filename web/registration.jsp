@@ -1,15 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.*, 
-        DAOs.DAOUsuario ,
-        Entidades.Usuario" %>
-<%
-    DAOUsuario dao = new DAOUsuario();
-    Usuario cat = new Usuario();
-    String editando = request.getParameter("id");
-    if (editando != null) {
-        cat = dao.listById(Integer.parseInt(request.getParameter("id"))).get(0);
-    }
-%>
+
+
 
 
 <!DOCTYPE html>
@@ -46,44 +37,29 @@
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Informações</h2>
-                    <form method="POST" action="${pageContext.request.contextPath}/usuario" role="form">
+                    <form method="post" action="${pageContext.request.contextPath}/usuario" role="form">
                         <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="NOME" name="" value="<%=editando != null ? cat.getNomeUsuario() : ""%>">
+                            <input class="input--style-1" type="text" placeholder="NOME" name="nome" value=""/>
                         </div>
                         <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="USERNAME" name="username">
+                            <input class="input--style-1" type="text" placeholder="USERNAME" name="username" />
                         </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <!--<div class="input-group">
-                                    <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="gender">
-                                            <option disabled="disabled" selected="selected">GÊNERO</option>
-                                            <option>Masculino</option>
-                                            <option>Feminino</option>
-                                            <option>Outro</option>
-                                        </select>
-                                        <div class="select-dropdown"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="row row-space">
                             <div class="col-3">
                                 <div class="input-group">
-                                    <input class="input--style-1" type="text" placeholder="E-MAIL" name="email">
+                                    <input class="input--style-1" type="text" placeholder="E-MAIL" name="email" />
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
                             <div class="col-3">
                                 <div class="input-group">
-                                    <input class="input--style-1" type="password" placeholder="SENHA" name="password">
+                                    <input class="input--style-1" type="password" placeholder="SENHA" name="senha" />
                                 </div>
                             </div>
                         </div>
                         <div class="p-t-20">
-                            <button class="btn btn--radius btn--green" type="submit" value="1" name="ok">Criar</button>
+                            <button class="btn btn--radius btn--green" type="submit" name="ok">Criar</button>
                         </div>
                     </form>
                 </div>
