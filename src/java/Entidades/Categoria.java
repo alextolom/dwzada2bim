@@ -6,7 +6,7 @@
 package Entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,7 +39,7 @@ public class Categoria implements Serializable {
         @JoinColumn(name = "Categoria_idCategoria", referencedColumnName = "idCategoria")}, inverseJoinColumns = {
         @JoinColumn(name = "Comunidade_idComunidade", referencedColumnName = "idComunidade")})
     @ManyToMany
-    private Collection<Comunidade> comunidadeCollection;
+    private List<Comunidade> comunidadeList;
 
     public Categoria() {
     }
@@ -64,12 +64,12 @@ public class Categoria implements Serializable {
         this.nomeCategoria = nomeCategoria;
     }
 
-    public Collection<Comunidade> getComunidadeCollection() {
-        return comunidadeCollection;
+    public List<Comunidade> getComunidadeList() {
+        return comunidadeList;
     }
 
-    public void setComunidadeCollection(Collection<Comunidade> comunidadeCollection) {
-        this.comunidadeCollection = comunidadeCollection;
+    public void setComunidadeList(List<Comunidade> comunidadeList) {
+        this.comunidadeList = comunidadeList;
     }
 
     @Override
