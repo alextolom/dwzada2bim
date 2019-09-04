@@ -6,7 +6,7 @@
 package Entidades;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,18 +37,18 @@ public class Comunidade implements Serializable {
     private String nomeComunidade;
     @Column(name = "moderadorComunidade")
     private String moderadorComunidade;
-    @ManyToMany(mappedBy = "comunidadeList")
-    private List<Categoria> categoriaList;
-    @JoinTable(name = "moderador_has_Comunidade", joinColumns = {
+    @ManyToMany(mappedBy = "comunidadeCollection")
+    private Collection<Categoria> categoriaCollection;
+    @JoinTable(name = "Comunidade_has_moderador", joinColumns = {
         @JoinColumn(name = "Comunidade_idComunidade", referencedColumnName = "idComunidade")}, inverseJoinColumns = {
         @JoinColumn(name = "moderador_idModerador", referencedColumnName = "idModerador")})
     @ManyToMany
-    private List<Moderador> moderadorList;
-    @JoinTable(name = "usuario_has_Comunidade", joinColumns = {
+    private Collection<Moderador> moderadorCollection;
+    @JoinTable(name = "Comunidade_has_usuario", joinColumns = {
         @JoinColumn(name = "Comunidade_idComunidade", referencedColumnName = "idComunidade")}, inverseJoinColumns = {
         @JoinColumn(name = "usuario_idUsuario", referencedColumnName = "idUsuario")})
     @ManyToMany
-    private List<Usuario> usuarioList;
+    private Collection<Usuario> usuarioCollection;
 
     public Comunidade() {
     }
@@ -81,28 +81,28 @@ public class Comunidade implements Serializable {
         this.moderadorComunidade = moderadorComunidade;
     }
 
-    public List<Categoria> getCategoriaList() {
-        return categoriaList;
+    public Collection<Categoria> getCategoriaCollection() {
+        return categoriaCollection;
     }
 
-    public void setCategoriaList(List<Categoria> categoriaList) {
-        this.categoriaList = categoriaList;
+    public void setCategoriaCollection(Collection<Categoria> categoriaCollection) {
+        this.categoriaCollection = categoriaCollection;
     }
 
-    public List<Moderador> getModeradorList() {
-        return moderadorList;
+    public Collection<Moderador> getModeradorCollection() {
+        return moderadorCollection;
     }
 
-    public void setModeradorList(List<Moderador> moderadorList) {
-        this.moderadorList = moderadorList;
+    public void setModeradorCollection(Collection<Moderador> moderadorCollection) {
+        this.moderadorCollection = moderadorCollection;
     }
 
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
+    public Collection<Usuario> getUsuarioCollection() {
+        return usuarioCollection;
     }
 
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
+    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
+        this.usuarioCollection = usuarioCollection;
     }
 
     @Override

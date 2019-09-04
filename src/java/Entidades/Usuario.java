@@ -6,7 +6,7 @@
 package Entidades;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,8 +39,8 @@ public class Usuario implements Serializable {
     private String nomeUsuario;
     @Column(name = "emailUsuario")
     private String emailUsuario;
-    @ManyToMany(mappedBy = "usuarioList")
-    private List<Comunidade> comunidadeList;
+    @ManyToMany(mappedBy = "usuarioCollection")
+    private Collection<Comunidade> comunidadeCollection;
 
     public Usuario() {
     }
@@ -89,12 +89,12 @@ public class Usuario implements Serializable {
         this.emailUsuario = emailUsuario;
     }
 
-    public List<Comunidade> getComunidadeList() {
-        return comunidadeList;
+    public Collection<Comunidade> getComunidadeCollection() {
+        return comunidadeCollection;
     }
 
-    public void setComunidadeList(List<Comunidade> comunidadeList) {
-        this.comunidadeList = comunidadeList;
+    public void setComunidadeCollection(Collection<Comunidade> comunidadeCollection) {
+        this.comunidadeCollection = comunidadeCollection;
     }
 
     @Override
