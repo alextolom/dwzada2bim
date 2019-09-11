@@ -1,10 +1,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.*, 
+        DAOs.DAOCategoria,
+        Entidades.Categoria,
+        DAOs.DAOComunidade,
+        Entidades.Comunidade,
+        java.text.NumberFormat" %>
+<%
+    Locale ptBr = new Locale("pt", "BR");
+
+    DAOCategoria dao = new DAOCategoria();
+    List<Categoria> categorias = dao.listInOrderNome();
+%>
 
 
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 
 <head>
     <!-- Required meta tags-->
@@ -40,10 +53,18 @@
                         <div class="input-group">
                             <input class="input--style-1" type="text" placeholder="NOME DA COMUNIDADE" name="nomecomunidade" value=""/>
                         </div>
+                                                <select>
+                            <%
+                                for (Categoria u : categorias) {
+                            %>
+                            <option value="<%=u.getIdCategoria()%>"><%=u.getNomeCategoria()%></option>
+                            <%}%>
+                        </select>
                         <div class="p-t-20">
                             <button class="btn btn--radius btn--green" type="submit" name="ok">Criar</button>
                         </div>
                     </form>
+            
                 </div>
             </div>
         </div>

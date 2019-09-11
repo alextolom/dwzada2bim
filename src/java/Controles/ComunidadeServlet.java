@@ -5,7 +5,9 @@
  */
 package Controles;
 
+import DAOs.DAOCategoria;
 import DAOs.DAOComunidade;
+import Entidades.Categoria;
 import Entidades.Comunidade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,7 +43,12 @@ public class ComunidadeServlet extends HttpServlet {
             
             Comunidade comunidade = new Comunidade();
             DAOComunidade daoComunidade = new DAOComunidade();
+            DAOCategoria daoCategoria = new DAOCategoria();
             
+            //
+            
+            
+            //
             comunidade.setIdComunidade(daoComunidade.autoIdComunidade());
             comunidade.setNomeComunidade(nomeComunidade);
 //            comunidade.setImagemComunidade(imagemComunidade);
